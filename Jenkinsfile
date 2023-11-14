@@ -8,7 +8,13 @@ pipeline{
           url:    "https://github.com/SandeepNainala/Java-app.git"
         )
         }
-
+      }
+      stage('Unit test'){
+        steps{
+          scripts{
+            mvnTest()
+          }
+        }
       }
 
     }
