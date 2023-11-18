@@ -3,7 +3,6 @@
 pipeline{
 
     agent any
-    //agent { label 'Demo' }
 
     parameters{
 
