@@ -78,7 +78,7 @@ pipeline{
       }
       stage('Docker Image Push: DockerHub'){
       when { expression { params.action == 'create'} }
-        step{
+        steps{
           script{
             dockerImagePush("${params.ImageName}","${params.ImageTag}", "${params.DockerHubUser}")
           }
@@ -86,7 +86,7 @@ pipeline{
       }
       stage('Docker Image CleanUp: DockerHub'){
       when { expression { params.action == 'create'} }
-        step{
+        steps{
           script{
             dockerImageCleanUp("${params.ImageName}", "${params.ImageTag}", "${params.DockerHubUser}")
           }
