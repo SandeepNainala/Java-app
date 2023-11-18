@@ -14,13 +14,16 @@ pipeline{
 
     stages{
 
-        stage('Checkout from Git'){
-               steps{
-                    git branch: 'main', url: 'https://github.com/sandeepnainala/Java-app'
-                    }
-               }
+        stage('Git Checkout'){
+                    when { expression {  params.action == 'create' } }
+            steps{
+            gitCheckout(
+                branch: "main",
+                url: "https://github.com/SandeepNainala/Java_app.git"
+            )
+            }
         }
-        stage('Unit Test maven'){
+         stage('Unit Test maven'){
 
          when { expression {  params.action == 'create' } }
 
@@ -106,3 +109,4 @@ pipeline{
             }
         }
     }
+}
