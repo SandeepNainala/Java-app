@@ -3,7 +3,7 @@
 pipeline{
   agent any
   parameters {
-  choice(name: 'action', choices: 'create/delete', description: 'Choose create/Destroy')
+  choice(name: 'action', choices: 'create/ndelete', description: 'Choose create/Destroy')
   string(name: 'ImageName', defaultValue: 'name of the docker build', description: 'javapp')
   string(name: 'ImageTag', defaultValue: 'tag of the docker build', description: 'v1')
   string(name: 'DockerHubUser', defaultValue: 'name of the docker Application', description: 'sandeepnainala9')
