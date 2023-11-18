@@ -15,7 +15,7 @@ pipeline{
       stage('Unit test'){
          when { expression { params.action == 'create'} }
         steps{
-          scripts{
+          script{
             mvnTest()
           }
         }
@@ -23,7 +23,7 @@ pipeline{
       stage('Intergration Test Maven'){
       when { expression { params.action == 'create'} }
         steps{
-          scripts{
+          script{
             mvnIntegrationTest()
           }
         }
@@ -31,7 +31,7 @@ pipeline{
       stage('Static Code analysis: Sonarqube'){
       when { expression { params.action == 'create'} }
         steps{
-          scripts{
+          script{
             def SonarQubecredentialsId = 'sonar-api'
             staticCodeAnalysis(SonarQubecredentialsId)
           }
@@ -40,7 +40,7 @@ pipeline{
       stage('Quality Gate Status Check: Sonarqube'){
       when { expression { params.action == 'create'} }
         steps{
-          scripts{
+          script{
             def SonarQubecredentialsId = 'sonar-api'
             QualityGateStatus(SonarQubecredentialsId)
           }
@@ -49,8 +49,16 @@ pipeline{
       stage('Maven Build : Maven'){
       when { expression { params.action == 'create'} }
         steps{
-          scripts{
+          script{
             mvnBuild()
+          }
+        }
+      }
+      stage('Docker Image Build'){
+      when { expression { params.action == 'create'} }
+        steps{
+          script{
+            dockerBuild("${params.ImageName}", "${params.ImageTag}", "${params.DockerHubUser}")
           }
         }
       }
