@@ -12,6 +12,10 @@ pipeline{
         string(name: 'DockerHubUser', description: "name of the Application", defaultValue: 'sandeepnainala9')
     }
 
+    options {
+       ansiColor('xterm')
+    }
+
     stages{
 
         stage('Git Checkout'){
